@@ -3,7 +3,8 @@ from tkinter import *
 root = Tk()
 
 #Change the title
-root.title("Calculator")
+root.title("LaCroixSlayer Calculator")
+
 
 #Create Entry widget
 userEntry = Entry(root, width=35, borderwidth=5)
@@ -27,13 +28,50 @@ def buttonClear():
 def buttonAdd():
 	userNum = userEntry.get()
 	global firstNum
+	global operator
+	operator = "+"
+	firstNum = int(userNum)
+	userEntry.delete(0,END)
+
+def buttonSubtract():
+	userNum = userEntry.get()
+	global firstNum
+	global operator
+	operator = "-"
+	firstNum = int(userNum)
+	userEntry.delete(0,END)
+
+def buttonDivide():
+	userNum = userEntry.get()
+	global firstNum
+	global operator
+	operator = "/"
+	firstNum = int(userNum)
+	userEntry.delete(0,END)
+
+def buttonMultiply():
+	userNum = userEntry.get()
+	global firstNum
+	global operator
+	operator = "*"
 	firstNum = int(userNum)
 	userEntry.delete(0,END)
 
 def buttonEqual():
 	secondNum = userEntry.get()
 	userEntry.delete(0,END)
-	userEntry.insert(0, firstNum + int(secondNum))
+
+	if operand == "+":
+		userEntry.insert(0, firstNum + int(secondNum))
+
+	if operand == "-":
+		userEntry.insert(0, firstNum - int(secondNum))
+
+	if operand == "*":
+		userEntry.insert(0, firstNum * int(secondNum))
+		
+	if operand == "/":
+		userEntry.insert(0, firstNum / int(secondNum))	
 
 #Add Button widgets
 btn1 = Button(root, text="1", padx=40, pady=20, command=lambda: buttonClick(1))
@@ -48,8 +86,12 @@ btn9 = Button(root, text="9", padx=40, pady=20, command=lambda: buttonClick(9))
 btn0 = Button(root, text="0", padx=40, pady=20, command=lambda: buttonClick(0))
 
 btnAdd = Button(root, text="+", padx=40, pady=20, command=buttonAdd)
-btnEqual = Button(root, text="=", padx=99, pady=20, command=buttonClick)
+btnEqual = Button(root, text="=", padx=99, pady=20, command=buttonEqual)
 btnClear = Button(root, text="CLEAR", padx=83, pady=20, command=buttonClear)
+
+btnSubtract = Button(root, text="-", padx=41, pady=20, command=buttonSubtract)
+btnMultiply = Button(root, text="*", padx=42, pady=20, command=buttonMultiply)
+btnDivide = Button(root, text="/", padx=42, pady=20, command=buttonDivide)
 
 
 
@@ -71,5 +113,11 @@ btn0.grid(row=4,column=0)
 btnClear.grid(row=4, column=1, columnspan=2)
 btnAdd.grid(row=5, column=0)
 btnEqual.grid(row=5, column=1, columnspan=2)
+
+btnSubtract.grid(row=6, column=0)
+btnMultiply.grid(row=6, column=1)
+btnDivide.grid(row=6, column=2)
+
+
 
 root.mainloop()
